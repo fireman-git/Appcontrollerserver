@@ -1,42 +1,59 @@
 package com.fireman.appcontrollerserver;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import android.bluetooth.BluetoothDevice;
+import android.os.Handler;
+import android.os.Message;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
+    static final String TAG = "BTTEST1";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(getApplication(), MainService.class);
 
-        // 通知作成
-        PendingIntent sendPendingIntent = PendingIntent.getBroadcast(this, 0, sendIntent, 0);
-        int importance = NotificationManager.IMPORTANCE_HIGH; // デフォルトの重要度
-        NotificationChannel channel = new NotificationChannel(channelId, name, importance);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.channel_id))
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText(getString(R.string.notification_txt))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .addAction(R.drawable.ic_launcher_foreground, getString(R.string.notification_btn), );
-
-        // ボタン追加
-
-        // サービス開始
+        Intent intent = new Intent(getApplication(), BTClientService.class);
         startService(intent);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+//        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

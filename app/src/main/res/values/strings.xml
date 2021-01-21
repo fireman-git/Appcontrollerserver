@@ -3,4 +3,5 @@
     <string name="notification_btn">Close</string>
     <string name="notification_txt">Bluetooth操作待ち受け中</string>
     <string name="channel_id">controller</string>
+    <string name="UUID">00001101-0000-1000-8000-00805F9B34FB</string>
 </resources>
